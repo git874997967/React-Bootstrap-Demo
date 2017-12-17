@@ -1,31 +1,36 @@
 import React, {Component} from 'react'
-import  ReactDOM from 'react-dom'
-import {Button, Modal, OverlayTrigger, Popover, Tooltip,ButtonToolbar,Overlay} from 'react-bootstrap'
+import ReactDOM from 'react-dom'
+import {Button, ButtonToolbar, Modal, Overlay, OverlayTrigger, Popover, Tooltip,Grid,Panel} from 'react-bootstrap'
 
 class Ml extends Component {
     constructor(props) {
         super(props);
         this.state = {
             showModal: false,
-            show:true
+            show: true
         }
-        this.close = this.close.bind(this)
-        this.open = this.open.bind(this)
-        this.toggle=this.toggle.bind(this)
+        /*these  bind is pretty vital */
+     /*   this.close = this.close.bind(this)
+        this.open = this.open.bind(this)*/
+        this.toggle = this.toggle.bind(this)
     }
 
-    toggle(){
-            this.setState({show:!this.state.show})
+    toggle() {
+        this.setState({
+            show: !this.state.show,
+            showModal: !this.state.showModal
+        })
     }
-    close() {
-        /*use this.state instead of this.setState*/
+
+ /*   close() {
+        /!*use this.state instead of this.setState*!/
         this.setState({showModal: false})
 
     }
 
     open() {
         this.setState({showModal: true})
-    }
+    }*/
 
     render() {
         const popover = (
@@ -64,14 +69,14 @@ class Ml extends Component {
                 <strong>点击我</strong> 就可以看到这个信息。
             </Popover>
         );
-        const sharedProps={
-            show:this.state.show,
-            container:this,
-            target:()=>ReactDOM.findDOMNode(this.refs.target)
+        const sharedProps = {
+            show: this.state.show,
+            container: this,
+            target: () => ReactDOM.findDOMNode(this.refs.target)
         }
         return (
-            <div className='container'>
-           {/*     <div className="static-modal">
+            <Grid className='container'>
+                {/*     <div className="static-modal">
                     <Modal.Dialog>
                         <Modal.Header>
                             <Modal.Title>对话框标题</Modal.Title>
@@ -87,13 +92,14 @@ class Ml extends Component {
                         </Modal.Footer>
 
                     </Modal.Dialog>
-                </div>*/}
-                <div>
+                </Grid>*/}
+                <Grid>
+                    <Panel>
                     <p>click to trigger the modal button</p>
-                    <Button bsStyle='primary' bsSize='large' onClick={this.open}>
+                    <Button bsStyle='primary' bsSize='large' onClick={this.toggle}>
                         show the Modal
                     </Button>
-                    <Modal show={this.state.showModal} onHide={this.close}>
+                    <Modal show={this.state.showModal} onHide={this.toggle}>
                         <Modal.Header closeButton>
                             <Modal.Title>Modal heading</Modal.Title>
                         </Modal.Header>
@@ -135,12 +141,14 @@ class Ml extends Component {
                                 auctor fringilla.</p>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button onClick={this.close}>Close</Button>
+                            <Button onClick={this.toggle}>Close</Button>
                         </Modal.Footer>
                     </Modal>
-                </div>
-                <div>
-                    <ButtonToolbar>
+                    </Panel>
+                </Grid>
+                <Grid>
+                    <Panel>
+                    <ButtonToolbar justified>
                         {/*overlay is required*/}
                         <OverlayTrigger placement="left" overlay={tooltip1}>
                             <Button bsStyle="default">请将光标移到我上面</Button>
@@ -158,9 +166,11 @@ class Ml extends Component {
                             <Button bsStyle="default">请将光标移到我上面</Button>
                         </OverlayTrigger>
                     </ButtonToolbar>
-                </div>
-                <div className='container'>
-                    <ButtonToolbar>
+                    </Panel>
+                </Grid>
+                <Grid>
+                    <Panel>
+                    <ButtonToolbar justified>
                         <OverlayTrigger container={this} trigger="click" placement="left" overlay={popoverLeft}>
                             <Button>点击我</Button>
                         </OverlayTrigger>
@@ -174,8 +184,9 @@ class Ml extends Component {
                             <Button>点击我</Button>
                         </OverlayTrigger>
                     </ButtonToolbar>
-                </div>
-                <div>
+                    </Panel>
+                </Grid >
+                <Grid justified className='container'>
                     <Button ref="target" onClick={this.toggle}>
                         点击我!
                     </Button>
@@ -192,8 +203,8 @@ class Ml extends Component {
                     <Overlay {...sharedProps} placement="bottom">
                         <Tooltip id="overload-bottom">提示工具加载了！</Tooltip>
                     </Overlay>
-                </div>
-            </div>
+                </Grid>
+            </Grid>
         )
     }
 }

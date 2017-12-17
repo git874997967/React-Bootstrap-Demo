@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Button, ButtonToolbar, DropdownButton, MenuItem, SplitButton,Clearfix} from 'react-bootstrap'
+import {Button, ButtonToolbar, DropdownButton, MenuItem, SplitButton,Clearfix,Panel} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 class Bt extends Component {
@@ -45,6 +45,7 @@ class Bt extends Component {
 
         return (
             <div className='container'>
+                <Panel>
                 <ButtonToolbar>
                     <Button bsStyle='primary' bsSize='large' disabled> large primary diasbled</Button>
                     <Button bsStyle='info' bsSize='small' active> small info active</Button>
@@ -55,9 +56,13 @@ class Bt extends Component {
                         {text}
                     </Button>
                 </ButtonToolbar>
+                </Panel>
+                <Panel>
                 <ButtonToolbar>
                     {BUTTONS.map(this.renderDropdownButton)}
                 </ButtonToolbar>
+                </Panel>
+                <Panel>
                 <ButtonToolbar>
                     <DropdownButton bsSize="large" title="Large button" id="dropdown-size-large" disabled>
                         <MenuItem eventKey="1">Action</MenuItem>
@@ -74,6 +79,7 @@ class Bt extends Component {
                         <MenuItem eventKey="4">Separated link</MenuItem>
                     </DropdownButton>
                 </ButtonToolbar>
+                </Panel>
                 <Clearfix className='alert alert-info'>
                     <ul className='dropdown-menu open'>
                         <MenuItem header>标题</MenuItem>
